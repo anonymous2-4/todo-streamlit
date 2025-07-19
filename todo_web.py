@@ -29,10 +29,9 @@ tasks = load_tasks()
 if "new task" not in st.session_state:
     st.session_state.new_task = ""
 
-st.text_input("Enter a new task:", key="new_task")
+task = st.text_input("Enter a new task:", key="new_task")
 
 if st.button("Add Task"):
-    task = st.session_state.new_task
     if task:
         tasks.append(task)
         save_tasks(tasks)
