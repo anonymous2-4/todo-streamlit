@@ -26,11 +26,17 @@ st.caption("Simple task tracker that works on desktop and mobile")
 tasks = load_tasks()
 
 # Add new task
-new_task = st.text_input("Enter a new task:")
+if "new task" not in st.session_state:
+    st.session_state.new_task = ""
+
+st.text_input("Enter a new task:", key="new_task")
+
 if st.button("Add Task"):
-    if new_task:
-        tasks.append(new_task)
+    task = st.session_state.new_task
+    if task:
+        tasks.append(task)
         save_tasks(tasks)
+        st.session_state.new_task = ""
         st.rerun()
 
 # Show current tasks
